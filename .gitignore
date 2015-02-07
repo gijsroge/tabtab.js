@@ -1,0 +1,6 @@
+.DS_Store
+node_modules
+_site
+
+# Ignore files beginning with a #
+\#*

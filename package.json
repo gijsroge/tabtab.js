@@ -1,0 +1,53 @@
+{
+  "name": "tabtab.js",
+  "title": "tabtab.js",
+  "description": "A simple, 60+fps, easy-to-use animated tabs plugin for jQuery.",
+  "version": "0.1.0",
+  "main": "dist/tabtab.js",
+  "homepage": "https://github.com/gijsroge/tabtab.js",
+  "author": {
+    "name": "Gijs Rogé",
+    "url": "http://twitter.com/gijsroge"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gijsroge/tabtab.js.git"
+  },
+  "keywords": [
+    "velocity",
+    "accessible",
+    "tabs",
+    "tabtab",
+    "tabtab.js",
+    "jquery-plugin",
+    "browser",
+    "jquery-plugin"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/gijsroge/tabtab.js/blob/master/LICENSE"
+  },
+  "bugs": {
+    "url": "https://github.com/gijsroge/tabtab.js/issues"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "crayola": "0.0.1",
+    "grunt": "~0.4.2",
+    "grunt-bump": "0.0.15",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-watch": "~0.5.2",
+    "jshint-stylish": "~0.1.5",
+    "load-grunt-tasks": "~0.2.1",
+    "time-grunt": "~0.2.7"
+  },
+  "scripts": {
+    "test": "grunt jshint"
+  },
+  "codename": "Raw Umber"
+}

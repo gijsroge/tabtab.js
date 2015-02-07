@@ -1,0 +1,33 @@
+{
+  "name": "tabtab.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/gijsroge/tabtab.js",
+  "authors": [
+    "Gijs Rogé <rogegijs@gmail.com>"
+  ],
+  "description": "A simple, 60+fps, easy-to-use animated tabs plugin for jQuery",
+  "main": "dist/tabtab.js",
+  "license": "MIT",
+  "keywords": [
+    "velocity",
+    "accessible",
+    "tabs",
+    "tabtab",
+    "tabtab.js",
+    "jquery-plugin",
+    "browser",
+    "jquery-plugin"
+  ],
+  "ignore": [
+    "**/.*",
+    "*.json",
+    "src",
+    "example",
+    "node_modules",
+    "bower_components",
+    "Gruntfile.js"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  }
+}
