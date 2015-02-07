@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "homepage": "https://github.com/gijsroge/tabtab.js",
   "authors": [
-    "Gijs Rogé <rogegijs@gmail.com>"
+    { "name" : "Gijs Rogé",
+      "homepage" : "http://twitter.com/gijsroge"
+    }
   ],
   "description": "A simple, 60+fps, easy-to-use animated tabs plugin for jQuery",
   "main": "dist/tabtab.js",
@@ -28,6 +30,12 @@
     "Gruntfile.js"
   ],
   "dependencies": {
-    "jquery": ">= 1.9.0"
+    "jquery": ">= 1.7.0",
+    "velocity": ">= 1.2.1"
+  },
+  "repository" :
+  { 
+    "type" : "git",
+    "url" : "https://github.com/gijsroge/tabtab.js"
   }
 }

@@ -1,9 +1,3 @@
-/*
- * jQuery lightweight tabs system
- * Original author: @gijsroge
- * Licensed under the MIT license
- */
-
 (function($) {
 
     'use strict';
