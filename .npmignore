@@ -3,9 +3,8 @@
 .gitignore
 .jshintrc
 .travis.yml
+*.zip
+*.rar
 
 bower.json
-Gruntfile.js
-rangeslider.jquery.json
-
 /example
