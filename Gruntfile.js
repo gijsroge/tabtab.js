@@ -90,17 +90,20 @@ module.exports = function(grunt) {
                 push: true,
                 pushTo: 'origin master'
             }
+        },
+
+        //create package
+        compress: {
+            main: {
+                options: {
+                    archive: '<%= pkg.name %>-v<%= pkg.version %>.zip'
+                },
+                expand: true,
+                cwd: '<%= config.dist %>/',
+                src: ['**/*'],
+                dest: '/'
+            }
         }
-    });
-
-    // Generate codename
-    grunt.registerTask('codename', 'generate a fancy codename', function() {
-        var crayola = require('crayola');
-        var pkg = grunt.file.readJSON('./package.json');
-
-        pkg.codename = crayola().name;
-        grunt.log.write('The new codename is ' + pkg.codename);
-        grunt.file.write('./package.json', JSON.stringify(pkg, null, 2));
     });
 
     // Build task
@@ -110,6 +113,7 @@ module.exports = function(grunt) {
     grunt.registerTask('release', [
         'bump-only',
         'build',
+        'compress:main',
         'bump-commit'
     ]);
 };
