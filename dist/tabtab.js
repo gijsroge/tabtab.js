@@ -1,4 +1,4 @@
-/*! tabtab.js - v0.1.2 | (c) 2015 @gijsroge | MIT license | https://github.com/gijsroge/tabtab.js */
+/*! tabtab.js - v0.1.3 | (c) 2015 @gijsroge | MIT license | https://github.com/gijsroge/tabtab.js */
 (function($) {
 
     'use strict';
@@ -237,10 +237,6 @@
                     return false;
                 } else {
 
-                    /*
-                     * Check if we should disable prev/next controls
-                     */
-                    checkIfDisabled();
 
                     /*
                      * Add active class to current tab menu item
@@ -453,6 +449,12 @@
                     } else if(settings.animateHeight === false && settings.fixedHeight === false){
                         _this.find('.js-tabs-height').css('height', $(contentItem).eq(selectedItem).outerHeight());
                     }
+
+                    /*
+                     * Check if we should disable prev/next controls
+                     */
+                    checkIfDisabled();
+
                 }
                 settings.tabSwitched.call(this);
             };
