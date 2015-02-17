@@ -1,10 +1,4 @@
-/*! tabtab.js - v0.1.0 | (c) 2015 @gijsroge | MIT license | https://github.com/gijsroge/tabtab.js */
-/*
- * jQuery lightweight tabs system
- * Original author: @gijsroge
- * Licensed under the MIT license
- */
-
+/*! tabtab.js - v0.1.2 | (c) 2015 @gijsroge | MIT license | https://github.com/gijsroge/tabtab.js */
 (function($) {
 
     'use strict';
@@ -27,10 +21,9 @@
 
         $results = $children.filter(selector);
 
-        if ($results.length > 0){
+        if ($results.length > 0) {
             return $results;
-        }
-        else{
+        } else {
             return $children.closestChild(selector);
         }
     };
@@ -43,32 +36,33 @@
          * Plugin default options
          */
         var settings = $.extend({
-            tabMenu: '.tabs-menu', // direct container of the tab menu items
-            tabContent: '.tabs-content', // direct container of the tab content items
-            next: '.tabs-controls__next', // next slide trigger
-            prev: '.tabs-controls__prev', // previous slide trigger
+            tabMenu: '.tabs__menu',             // direct container of the tab menu items
+            tabContent: '.tabs__content',       // direct container of the tab content items
+            next: '.tabs-controls__next',       // next slide trigger
+            prev: '.tabs-controls__prev',       // previous slide trigger
 
-            startSlide: 1,
-            arrows: true, // keyboard arrow navigation
-            dynamicHeight: true, // true: animate height changes | false: set container to highest height
-            useAnimations: true,
+            startSlide: 2,                      // starting slide on pageload
+            arrows: true,                       // keyboard arrow navigation
+            animateHeight: true,                // if true the height will dynamic and animated.
+            fixedHeight: true,                  // if set to true the container will use the heighest height.
+            useAnimations: true,                // disables animations.
 
-            easing: [0.86, 0, 0.07, 1], // http://easings.net/ replace with values of cubic-bezier
-            speed: 600,
-            slideDelay: 0,
-            perspective: 1200,
-            transformOrigin: 'center top',
-            perspectiveOrigin: '50% 50%',
+            easing: [200, 20],                  // http://julian.com/research/velocity/#easing
+            speed: 700,                         // animation speed
+            slideDelay: 0,                      // delay the animation
+            perspective: 1500,                  // set 3D perspective
+            transformOrigin: 'center top',      // set the center point of the 3d animation
+            perspectiveOrigin: '50% 50%',       // camera angle
 
-            translateY: 0, //normal position = 0
-            translateX: 0, //if set to 'slide' the animation will slide the max width of the content
-            scale: 0.9, //normal size = 1
-            rotateX: 0, //normal rotation = 0
-            rotateY: 0, //normal rotation = 0
-            skewY: 0, //normal rotation = 0
-            skewX: 0, //normal rotation = 0
+            translateY: 0,                      // animate along the Y axis (val: px or ‘slide’)
+            translateX: 0,                      // animate along the X axis (val: px or ‘slide’)
+            scale: 1.05,                           // animate scale (val: 0-2)
+            rotateX: 20,                        // animate rotation (val: 0deg-360deg)
+            rotateY: 0,                         // animate Y acces rotation (val: 0deg-360deg)
+            skewY: 0,                           // animate Y skew (val: 0deg-360deg)
+            skewX: 0,                           // animate X skew (val: 0deg-360deg)
 
-            tabSwitched: function() {} //callback after a tab has switched
+            tabSwitched: function() {}          //callback after a tab has switched
         }, options);
 
 
@@ -109,7 +103,7 @@
                 settings.translateY = $(contentItem).outerHeight();
             }
 
-            var index = settings.startSlide;
+            var index = settings.startSlide - 1;
             var from = 'left';
             var next = _this.find(settings.next);
             var prev = _this.find(settings.prev);
@@ -135,21 +129,23 @@
              */
             contentItem.css('position', 'absolute');
 
+
             /*
              * Set height
              */
             maxHeight = 0;
             content.wrapInner('<div class="js-tabs-height"></div>');
-            if (settings.dynamicHeight === true) {
+            if (settings.animateHeight === true && settings.fixedHeight === false) {
 
 
                 /*
-                 * Dynamic height
+                 * Animate height
                  */
                 maxHeight = contentItem.eq(previousIndex).outerHeight();
                 _this.find('.js-tabs-height').height(maxHeight);
 
-            } else {
+
+            }else if (settings.fixedHeight === true){
 
 
                 /*
@@ -159,9 +155,12 @@
                     maxHeight = maxHeight > $(this).outerHeight() ? maxHeight : $(this).outerHeight();
                 });
                 _this.find('.js-tabs-height').height(maxHeight);
+
+
+            }else{
+                maxHeight = contentItem.eq(previousIndex).outerHeight();
+                _this.find('.js-tabs-height').height(maxHeight);
             }
-
-
 
 
             /*
@@ -183,7 +182,6 @@
                  * Set previous index to compare
                  */
                 previousIndex = index;
-
                 return false;
             });
 
@@ -209,7 +207,6 @@
              */
             if (settings.arrows === true && instance <= 1) {
                 $(document).keydown(function(e) {
-
                     if (!$('input').is(':focus')) {
                         if (e.keyCode === 37) {
                             index = previousIndex - 1;
@@ -220,7 +217,6 @@
                             tabSwitch(index, previousIndex);
                         }
                     }
-
                 });
             }
 
@@ -256,8 +252,6 @@
                     /*
                      * Add active class to current tab content item
                      */
-                    console.log('aria-hidden');
-
                     contentItem.eq(previousItem).removeClass('active').attr('aria-hidden', 'true');
                     contentItem.eq(selectedItem).addClass('active').attr('aria-hidden', 'false');
 
@@ -284,10 +278,6 @@
                     }
 
 
-
-                    /*
-                     * START DELETE
-                     */
                     if (velocity) {
                         /*
                          * Animate elements in view
@@ -445,37 +435,26 @@
                         contentItem.eq(previousItem).hide();
                         contentItem.eq(selectedItem).show();
                     }
-                    /*
-                     * END DELETE
-                     */
 
 
                     /*
                      * Animate height
                      */
-                    if (settings.dynamicHeight === true) {
-                        if (velocity) {
-                            /*
-                             * START DELETE
-                             */
-                            _this.find('.js-tabs-height')
-                                .velocity({
-                                    height: $(contentItem).eq(selectedItem).outerHeight(),
-                                }, {
-                                    easing: settings.easing,
-                                    duration: settings.speed,
-                                    queue: false
-                                });
-                            /*
-                             * END DELETE
-                             */
-                        } else {
-                            _this.find('.js-tabs-height').css('height', $(contentItem).eq(selectedItem).outerHeight());
-                        }
+                    if (settings.animateHeight === true && velocity && settings.fixedHeight !== true) {
+                        _this.find('.js-tabs-height')
+                        .velocity({
+                            height: $(contentItem).eq(selectedItem).outerHeight(),
+                        }, {
+                            easing: settings.easing,
+                            duration: settings.speed,
+                            queue: false
+                        });
+                        
+                    } else if(settings.animateHeight === false && settings.fixedHeight === false){
+                        _this.find('.js-tabs-height').css('height', $(contentItem).eq(selectedItem).outerHeight());
                     }
                 }
                 settings.tabSwitched.call(this);
-
             };
 
 
@@ -484,9 +463,6 @@
              */
             contentItem.each(function() {
                 if (velocity) {
-                    /*
-                     * START DELETE
-                     */
                     if ($(this).index() !== previousIndex) {
                         $(this)
                             .velocity({
@@ -506,9 +482,6 @@
                             'z-index': menuItemCount
                         });
                     }
-                    /*
-                     * END DELETE
-                     */
                 } else {
                     $(this).hide();
                 }
@@ -540,12 +513,14 @@
 
             var checkIfDisabled = function() {
                 if (index === menuItemCount - 1) {
-                    next.addClass('disabled').attr('disabled', 'disabled');
+                    next.addClass('disabled');
+                    prev.removeClass('disabled');
                 } else if (index === 0) {
-                    prev.addClass('disabled').attr('disabled', 'disabled');
+                    prev.addClass('disabled');
+                    next.removeClass('disabled');
                 } else {
-                    next.removeClass('disabled').removeAttr('disabled');
-                    prev.removeClass('disabled').removeAttr('disabled');
+                    next.removeClass('disabled');
+                    prev.removeClass('disabled');
                 }
             };
 
@@ -558,14 +533,11 @@
 
             /*
              * Its possible that the startslide is 0
-             * so check if we should disalbe previous button
+             * so check if we should disable a button
              */
             checkIfDisabled();
 
 
-
         });
-
     };
-
 }(jQuery));

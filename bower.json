@@ -1,13 +1,13 @@
 {
   "name": "tabtab.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/gijsroge/tabtab.js",
   "authors": [
     { "name" : "Gijs Rogé",
       "homepage" : "http://twitter.com/gijsroge"
     }
   ],
-  "description": "A simple, 60+fps, easy-to-use animated tabs plugin for jQuery",
+  "description": "A simple, Accessible, 60+fps, easy-to-use animated tabs plugin for jQuery.",
   "main": "dist/tabtab.js",
   "license": "MIT",
   "keywords": [

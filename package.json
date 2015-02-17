@@ -1,8 +1,8 @@
 {
   "name": "tabtab.js",
   "title": "tabtab.js",
-  "description": "A simple, 60+fps, easy-to-use animated tabs plugin for jQuery.",
-  "version": "0.1.1",
+  "description": "A simple, Accessible, 60+fps, easy-to-use animated tabs plugin for jQuery.",
+  "version": "0.1.2",
   "main": "dist/tabtab.js",
   "homepage": "https://github.com/gijsroge/tabtab.js",
   "author": {
