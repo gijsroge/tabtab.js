@@ -45,6 +45,7 @@
             animateHeight: true,                // if true the height will dynamic and animated.
             fixedHeight: true,                  // if set to true the container will use the heighest height.
             useAnimations: true,                // disables animations.
+            autoCycle: 2000,                   // To disable set option to false. To enable specify the speed in miliseconds.
 
             easing: [200, 20],                  // http://julian.com/research/velocity/#easing
             speed: 700,                         // animation speed
@@ -218,6 +219,29 @@
                     }
                 });
             }
+
+
+            /**
+             * Autocycle tabs
+             */
+            if (settings.autoCycle){
+                var cycle = function() {
+                    console.log('cycle');
+                    index = previousIndex + 1;
+                    if (index >= menuItemCount){
+                        index = 0;
+                    }
+                    tabSwitch(index, previousIndex);
+                };
+
+                var interval = setInterval(cycle, settings.autoCycle);
+
+                $(this).on('mouseover', function(){
+                    console.log('mouseOver');
+                    window.clearInterval(interval)
+                });
+                $(this).on('mouseleave', function(){interval = setInterval(cycle, settings.autoCycle)});
+            };
 
 
             /*
